@@ -1,5 +1,5 @@
 all:
-	DreamMaker dmut.dme
+	scripts/dm.sh -DTESTING dmut.dme
 clean:
 	rm -f dmut.dmb dmut.rsc
 run:
