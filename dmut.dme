@@ -1,4 +1,3 @@
 #define DEBUG
-#include "package.dm"
-#include "test.dm"
-#include "tests.dm"
+#include "_package.dm"
+#include "tests/_tests.dm"
