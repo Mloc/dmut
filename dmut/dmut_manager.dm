@@ -43,19 +43,33 @@
 		test = new p
 
 		var/ret_val = null
-		try
-			if(test.__fixture)
+
+		if(test.__fixture)
+			try
 				test.fixture_setup()
+			catch(var/exception/esetup)
+				ret_val = 1
+				liason.name = "unhandled exception '[esetup.type] ([esetup.name])' in fixture setup"
+				liason.file = esetup.file
+				liason.line = esetup.line
 
-			ret_val = test.run_test(liason)
+		if(!ret_val)
+			try
+				ret_val = test.run_test(liason)
+			catch(var/exception/erun)
+				ret_val = 1
+				liason.name = "unhandled exception '[erun.type] ([erun.name])'"
+				liason.file = erun.file
+				liason.line = erun.line
 
 			if(test.__fixture)
-				test.fixture_destroy()
-		catch(var/exception/e)
-			ret_val = 1
-			liason.name = "unhandled exception '[e.type] ([e.name])'"
-			liason.file = e.file
-			liason.line = e.line
+				try
+					test.fixture_destroy()
+				catch(var/exception/edestroy)
+					ret_val = 1
+					liason.name = "unhandled exception '[edestroy.type] ([edestroy.name])' in fixture destroy"
+					liason.file = edestroy.file
+					liason.line = edestroy.line
 
 		if(ret_val)
 			fail_count++
