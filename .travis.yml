@@ -10,5 +10,5 @@ cache:
     - $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
 
 before_script:
-  - ./install_byond.sh
+  - ./install-byond.sh
   - scripts/dm.sh -DTESTING dmut.dme
