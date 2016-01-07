@@ -22,6 +22,5 @@ before_script:
 script:
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
   - scripts/dm.sh -DTESTING dmut.dme
-
   - DreamDaemon dmut.dmb 2>&1 | tee dmut.log
-  - grep '## DMUT: RESULT: PASSING' dmut.log
+  - "grep '## DMUT: RESULT: PASSING' dmut.log"
